@@ -1,7 +1,8 @@
 package hackerrank.interviewprepkit.arrays;
 
 /*
- *Starting with a 1-indexed array of zeros and a list of operations, for each operation add a value to each of the array element between two given indices, inclusive. 
+ *Starting with a 1-indexed array of zeros and a list of operations, for each operation add a value to each of the array element between two given indices, inclusive.
+ 
 Once all operations have been performed, return the maximum value in your array.
 
 For example, the length of your array of zeros n =10 . Your list of queries is as follows:
@@ -24,40 +25,41 @@ https://www.hackerrank.com/challenges/crush/problem?h_l=interview&playlist_slugs
 
 
  */
-
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class ArrayManipulation {
 
-	//TODO: Many tests failed
     // Complete the arrayManipulation function below.
     static long arrayManipulation(int n, int[][] queries) {
-    	int result = -1;
     	
-    	int[] resultArr = new int[n];
-    	Arrays.fill(resultArr, 0);
+    	//This will be the "difference array". The entry arr[i]=k indicates that arr[i] is exactly k units larger than arr[i-1]
+    	long[] arr = new long[n];
     	
-    	for(int i = 0; i < queries.length; i++ ) {
-    		for(int j = queries[i][0]-1; j <queries[i][1]; j++) {
-    			resultArr[j] += queries[i][2];
-    		}
+    	for(int i=0;i<queries.length;i++){
+    	    arr[queries[i][0]-1]+=queries[i][2];
+    	    if(queries[i][1]<n) arr[queries[i][1]]-=queries[i][2]; 
+    	}
+    	        
+    	long max=0;
+    	long temp=0;
+
+    	for(int i=0;i<n;i++){
+    	    temp += arr[i];
+    	    if(temp> max) max=temp;
     	}
 
-    	Arrays.sort(resultArr);
-    	result = resultArr[resultArr.length-1];
-    	
-    	return result;
+		return max;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
+    	//variable not defined in environment, thus resulting in error
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
         String[] nm = scanner.nextLine().split(" ");
