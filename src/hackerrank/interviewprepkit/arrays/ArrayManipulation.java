@@ -37,7 +37,7 @@ public class ArrayManipulation {
     // Complete the arrayManipulation function below.
     static long arrayManipulation(int n, int[][] queries) {
     	
-    	//This will be the "difference array". The entry arr[i]=k indicates that arr[i] is exactly k units larger than arr[i-1]
+    // An array of differences between an element and the previous one
     	long[] arr = new long[n];
     	
     	for(int i=0;i<queries.length;i++){
