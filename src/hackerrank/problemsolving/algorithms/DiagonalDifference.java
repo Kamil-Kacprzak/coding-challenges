@@ -14,31 +14,6 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Result {
-
-    /*
-     * Complete the 'diagonalDifference' function below.
-     *
-     * The function is expected to return an INTEGER.
-     * The function accepts 2D_INTEGER_ARRAY arr as parameter.
-     */
-
-    public static int diagonalDifference(List<List<Integer>> arr) {
-    // Write your code here
-    	int result = -1;
-    	int diag1 = 0, diag2 = 0;
-    	if(arr != null && !arr.isEmpty() && (arr.size() == arr.get(0).size())){
-    		for(int i = 0; i < arr.size(); i++) {
-    			diag1 += arr.get(i).get(i);
-    			diag2 += arr.get(i).get(arr.size()-1-i);
-    		}				
-    		result = diag1 >= diag2 ? diag1 - diag2 : diag2 - diag1;
-    	}
-    	
-    	return result;
-    }
-
-}
 
 public class DiagonalDifference {
     public static void main(String[] args) throws IOException {
@@ -61,12 +36,34 @@ public class DiagonalDifference {
             }
         });
 
-        int result = Result.diagonalDifference(arr);
+        int result = diagonalDifference(arr);
 
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
 
         bufferedReader.close();
         bufferedWriter.close();
+    }
+
+    /*
+     * Complete the 'diagonalDifference' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+     */
+
+    public static int diagonalDifference(List<List<Integer>> arr) {
+    // Write your code here
+    	int result = -1;
+    	int diag1 = 0, diag2 = 0;
+    	if(arr != null && !arr.isEmpty() && (arr.size() == arr.get(0).size())){
+    		for(int i = 0; i < arr.size(); i++) {
+    			diag1 += arr.get(i).get(i);
+    			diag2 += arr.get(i).get(arr.size()-1-i);
+    		}				
+    		result = diag1 >= diag2 ? diag1 - diag2 : diag2 - diag1;
+    	}
+    	
+    	return result;
     }
 }
